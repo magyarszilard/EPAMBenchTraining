@@ -17,5 +17,22 @@ namespace Restaurant
         {
             return happiness + 2;
         }
+
+        public override string ToString()
+        {
+            return "food=HotDog";
+        }
+    }
+
+    public class Chips : Food
+    {
+        public override double CalculateHappiness(double happiness)
+        {
+            return happiness * 1.05;
+        }
+        public override string ToString()
+        {
+            return "food=Chips";
+        }
     }
 }
