@@ -17,7 +17,7 @@ namespace Restaurant
         }
         public void Eat(IFood food)
         {
-            Console.WriteLine($"Client: Starting to eat food {this}, food: {food}");
+            Console.WriteLine($"Client: Starting to eat food, client: {this}, food: {food}");
             Happiness = food.CalculateHappiness(Happiness);
             Console.WriteLine("Client: Csam csam nyam nyam");
             Console.WriteLine($"Client: Food eaten, client: {this}");

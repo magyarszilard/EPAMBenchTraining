@@ -33,7 +33,7 @@ namespace Restaurant
             Console.WriteLine($"Kitchen: Prepairing food, order: {order}");
             IFood food = CreateMainFood(order.Food);
             food = AddExtras(food, order.Extras);
-            Console.WriteLine($"Kitchen: Food prepaired, food: {food}");
+            Console.WriteLine($"Kitchen: Food prepared, food: {food}");
             return food;
         }
     }

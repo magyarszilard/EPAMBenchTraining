@@ -20,8 +20,9 @@ namespace Restaurant
         public void TakeOrder(Client client, Order order)
         {
             Console.WriteLine($"WaitressRobot: Order registered, client:{client}, order: {order}");
-            Action<object, FoodReadyEventArgs> func = (sender, args) => { client.Eat(args.Food); };
-            order.FoodReady += new EventHandler<FoodReadyEventArgs>(func);
+            /*Action<object, FoodReadyEventArgs> func = (sender, args) => { client.Eat(args.Food); };
+            order.FoodReady += new EventHandler<FoodReadyEventArgs>(func);*/
+            order.FoodReady += (sender, args) => { client.Eat(args.Food); };
             Orders.Enqueue(order);
         }
 
