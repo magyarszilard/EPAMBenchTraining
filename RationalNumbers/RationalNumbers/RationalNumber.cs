@@ -68,6 +68,10 @@ namespace RationalNumbers
         {
             return new RationalNumber(x.numerator * -1, x.denominator);
         }
+        public static implicit operator RationalNumber(int num)
+        {
+            return new RationalNumber(num, 1);
+        }
         private static int Gcd(int x, int y)
         {
             return y == 0 ? x : Gcd(y, x % y);

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeral", "RomanNumera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RationalNumbers", "..\RationalNumbers\RationalNumbers\RationalNumbers.csproj", "{6B0B21BA-598B-43C1-9EC2-A3A958222782}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant", "..\Restaurant\Restaurant.csproj", "{48387F8A-65F5-4823-BB0E-C6E6769F0E63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6B0B21BA-598B-43C1-9EC2-A3A958222782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B0B21BA-598B-43C1-9EC2-A3A958222782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B0B21BA-598B-43C1-9EC2-A3A958222782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48387F8A-65F5-4823-BB0E-C6E6769F0E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48387F8A-65F5-4823-BB0E-C6E6769F0E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48387F8A-65F5-4823-BB0E-C6E6769F0E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48387F8A-65F5-4823-BB0E-C6E6769F0E63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

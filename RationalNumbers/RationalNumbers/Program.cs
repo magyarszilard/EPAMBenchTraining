@@ -10,7 +10,7 @@ namespace RationalNumbers
     {
         static void Main(string[] args)
         {
-            RationalNumber num1 = new RationalNumber(3, 4);
+            /*RationalNumber num1 = new RationalNumber(3, 4);
             RationalNumber num2 = new RationalNumber(12, 16);
             RationalNumber num3 = new RationalNumber(-2, 15);
             RationalNumber num4 = new RationalNumber(-10, -20);
@@ -24,7 +24,8 @@ namespace RationalNumbers
             Console.WriteLine(num1 + num5);
             Console.WriteLine(num3 - num4);
             Console.WriteLine(num2 / num3);
-            Console.WriteLine(-num2);
+            Console.WriteLine(-num2);*/
+            Console.WriteLine((RationalNumber)3);
             Console.ReadLine();
         }
         /*

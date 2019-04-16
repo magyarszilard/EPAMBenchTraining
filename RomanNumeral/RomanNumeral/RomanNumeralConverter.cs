@@ -15,7 +15,7 @@ namespace RomanNumeral
         {
             if(number < 1 || number > 3999)
             {
-                return "Invalid Roman Numeral.";
+                throw new ArgumentOutOfRangeException();
             }
             string ret = String.Empty;
             int power = 0;
