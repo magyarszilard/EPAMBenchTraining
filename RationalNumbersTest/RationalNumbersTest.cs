@@ -34,7 +34,8 @@ namespace RationalNumbersTest
         public void ToStringTest(int numerator, int denominator, string result)
         {
             RationalNumber value = new RationalNumber(numerator, denominator);
-            Assert.AreEqual(value.ToString(), result);
+            string str = value.ToString();
+            Assert.AreEqual(str, result);
         }
 
         [DataRow(1, 3, 1, 4, 1)]
@@ -45,7 +46,8 @@ namespace RationalNumbersTest
         {
             RationalNumber value = new RationalNumber(numerator, denominator);
             RationalNumber value2 = new RationalNumber(numerator2, denominator2);
-            Assert.AreEqual(value.CompareTo(value2), result);
+            int comp = value.CompareTo(value2);
+            Assert.AreEqual(comp, result);
         }
 
         [DataRow(1, 3, 1, 4, "7r12")]
@@ -57,7 +59,8 @@ namespace RationalNumbersTest
         {
             RationalNumber value = new RationalNumber(numerator, denominator);
             RationalNumber value2 = new RationalNumber(numerator2, denominator2);
-            Assert.AreEqual((value + value2).ToString(), result);
+            string addition = (value + value2).ToString();
+            Assert.AreEqual(addition, result);
         }
 
         [DataRow(1, 3, 1, 4, "1r12")]
@@ -70,7 +73,8 @@ namespace RationalNumbersTest
         {
             RationalNumber value = new RationalNumber(numerator, denominator);
             RationalNumber value2 = new RationalNumber(numerator2, denominator2);
-            Assert.AreEqual((value - value2).ToString(), result);
+            string subtraction = (value - value2).ToString();
+            Assert.AreEqual(subtraction, result);
         }
 
         [DataRow(1, 3, 1, 4, "1r12")]
@@ -84,7 +88,8 @@ namespace RationalNumbersTest
         {
             RationalNumber value = new RationalNumber(numerator, denominator);
             RationalNumber value2 = new RationalNumber(numerator2, denominator2);
-            Assert.AreEqual((value * value2).ToString(), result);
+            string multiplication = (value * value2).ToString();
+            Assert.AreEqual(multiplication, result);
         }
 
         [DataRow(1, 3, 1, 4, "4r3")]
@@ -97,7 +102,8 @@ namespace RationalNumbersTest
         {
             RationalNumber value = new RationalNumber(numerator, denominator);
             RationalNumber value2 = new RationalNumber(numerator2, denominator2);
-            Assert.AreEqual((value / value2).ToString(), result);
+            string division = (value / value2).ToString();
+            Assert.AreEqual(division, result);
         }
 
         [TestMethod]
@@ -117,7 +123,8 @@ namespace RationalNumbersTest
         public void NegationTest(int numerator, int denominator, string result)
         {
             RationalNumber value = new RationalNumber(numerator, denominator);
-            Assert.AreEqual((-value).ToString(), result);
+            string negation = (-value).ToString();
+            Assert.AreEqual(negation, result);
         }
 
         [DataRow(1,"1")]
