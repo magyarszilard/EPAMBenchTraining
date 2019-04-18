@@ -24,10 +24,11 @@ namespace RomanNumeralTest
         [DataRow(2500, "MMD")]
         [DataRow(3999, "MMMCMXCIX")]
         [DataTestMethod]
-        public void ToRomanTestValidNumbers(int number, string value)
+        public void ToRomanTestValidNumbers(int number, string expected)
         {
-            string result = number.ToRoman();
-            Assert.AreEqual(result, value);
+            string result;
+            result = number.ToRoman();
+            Assert.AreEqual(result, expected);
 
         }
         [DataRow(0)]

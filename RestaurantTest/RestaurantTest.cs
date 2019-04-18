@@ -11,10 +11,10 @@ namespace RestaurantTest
         public void HotDogHappinessTest()
         {
             IFood food = new HotDog();
-
-            double happiness = food.CalculateHappiness(100);
-
-            Assert.AreEqual(happiness, 102);
+            double expected = 102;
+            double startingHappiness = 100;
+            double happiness = food.CalculateHappiness(startingHappiness);
+            Assert.AreEqual(happiness, expected);
         }
 
         [TestMethod]
@@ -22,30 +22,30 @@ namespace RestaurantTest
         {
             IFood food = new HotDog();
             food = new Ketchup(food);
-
-            double happiness = food.CalculateHappiness(100);
-
-            Assert.AreEqual(happiness, 104);
+            double expected = 104;
+            double startingHappiness = 100;
+            double happiness = food.CalculateHappiness(startingHappiness);
+            Assert.AreEqual(happiness, expected);
         }
         [TestMethod]
         public void HotDogWithMustardHappinessTest()
         {
             IFood food = new HotDog();
             food = new Mustard(food);
-
-            double happiness = food.CalculateHappiness(100);
-
-            Assert.AreEqual(happiness, 101);
+            double expected = 101;
+            double startingHappiness = 100;
+            double happiness = food.CalculateHappiness(startingHappiness);
+            Assert.AreEqual(happiness, expected);
         }
 
         [TestMethod]
         public void ChipsHappinessTest()
         {
             IFood food = new Chips();
-
-            double happiness = food.CalculateHappiness(100);
-
-            Assert.AreEqual(happiness, 105);
+            double expected = 105;
+            double startingHappiness = 100;
+            double happiness = food.CalculateHappiness(startingHappiness);
+            Assert.AreEqual(happiness, expected);
         }
 
         [TestMethod]
@@ -53,20 +53,20 @@ namespace RestaurantTest
         {
             IFood food = new Chips();
             food = new Ketchup(food);
-
-            double happiness = food.CalculateHappiness(100);
-
-            Assert.AreEqual(happiness, 110.25);
+            double expected = 110.25;
+            double startingHappiness = 100;
+            double happiness = food.CalculateHappiness(startingHappiness);
+            Assert.AreEqual(happiness, expected);
         }
         [TestMethod]
         public void ChipsWithMustardHappinessTest()
         {
             IFood food = new Chips();
             food = new Mustard(food);
-
-            double happiness = food.CalculateHappiness(100);
-
-            Assert.AreEqual(happiness, 101);
+            double expected = 101;
+            double startingHappiness = 100;
+            double happiness = food.CalculateHappiness(startingHappiness);
+            Assert.AreEqual(happiness, expected);
         }
     }
 }
