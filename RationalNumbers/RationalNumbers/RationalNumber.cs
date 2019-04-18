@@ -35,7 +35,7 @@ namespace RationalNumbers
             if (this.Equals(number))
                 return 0;
             int scm = Scm(this.denominator, number.denominator);
-            return numerator * scm > number.numerator * scm ? 1 : -1;
+            return numerator * scm / this.denominator > number.numerator * scm / number.denominator ? 1 : -1;
         }
 
         public override string ToString()

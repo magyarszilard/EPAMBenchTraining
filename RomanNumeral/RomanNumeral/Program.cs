@@ -11,7 +11,7 @@ namespace RomanNumeral
         static void Main(string[] args)
         {
             Console.WriteLine(42.ToRoman());
-            Console.WriteLine(1967.ToRoman()); 
+            Console.WriteLine(555.ToRoman()); 
             Console.ReadLine();
         }
     }
