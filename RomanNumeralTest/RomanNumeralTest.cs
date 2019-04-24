@@ -35,10 +35,10 @@ namespace RomanNumeralTest
         [DataRow(-1)]
         [DataRow(4000)]
         [DataTestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ToRomanTestInvalidNumbers(int number)
         {
-            number.ToRoman();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => number.ToRoman());
         }
     }
 }
