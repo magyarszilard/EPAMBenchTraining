@@ -6,7 +6,6 @@ namespace SecondMax
 {
     public static class EnumarableExtensions
     {
-        //TODO: Put your SecondMax extension method here
         public static T SecondMax<T>(this IEnumerable<T> list) where T:IComparable
         {
             if (list.Count() == 0)
