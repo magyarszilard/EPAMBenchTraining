@@ -7,7 +7,41 @@ using System.Collections;
 
 namespace TimeSlotEnumerator
 {
+
     public class TimeSlots : IEnumerable<string>
+    {
+        private List<string> _slots;
+        private string _startingSlot;
+        public TimeSlots(List<string> slots, string startingSlot, int count)
+        {
+            _slots = slots;
+            _startingSlot = startingSlot;
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            int index = _slots.FindIndex(a => a == _startingSlot);
+            yield return _slots[index];
+            int i = 1;
+            while (index - i >= 0 || index + i < _slots.Count)
+            {
+                if (index - i >= 0)
+                {
+                    yield return _slots[index - i];
+                }
+                if (index + i < _slots.Count)
+                {
+                    yield return _slots[index + i];
+                }
+                i++;
+            }
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
+    /*public class TimeSlots : IEnumerable<string>
     {
         private List<string> _slots;
         private string _startingSlot;
@@ -43,6 +77,6 @@ namespace TimeSlotEnumerator
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-    }
+        }*/
+}
 }
