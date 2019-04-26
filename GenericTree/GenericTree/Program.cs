@@ -44,7 +44,7 @@ namespace GenericTree
             bootstrap.Add(docs);
             #endregion
 
-            bootstrap.Draw();
+            //bootstrap.Draw();
             /*foreach(var item in bootstrap.GetItemsDepthFirst())
             {
                 Console.WriteLine(item.Value);
@@ -56,7 +56,9 @@ namespace GenericTree
             }*/
             //Console.WriteLine(bootstrap.Contains("bootstrap-theme.css"));
             //Console.WriteLine(bootstrap.Contains(a=>a.StartsWith("bootst")));
-
+            Tree<FileInfo> fileTree = new Tree<FileInfo>(new FileInfo("test"), a=>a.Name);
+            fileTree.Add(new FileInfo("test2.txt"));
+            Console.WriteLine(fileTree.Find("test/test2.txt"));
             Console.WriteLine(bootstrap.Find("/bootstrap/dist/js/bootstrap.min.js")); 
             Console.Read();
         }
