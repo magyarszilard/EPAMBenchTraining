@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace GenericTree
         static void Main(string[] args)
         {
             #region buildTree
-            Tree<string> bootstrap = new Tree<string>("bootstrap");
+            Tree<string> bootstrap = new Tree<string>("BOOTSTRAP", a=>a.ToLower());
+            //Tree<string> bootstrap = new Tree<string>("bootstrap");
             bootstrap.Add("less");
             bootstrap.Add("js");
             bootstrap.Add("fonts");
@@ -24,7 +26,7 @@ namespace GenericTree
             css.Add("bootstrap-theme.min.css");
             Tree<string> js = new Tree<string>("js");
             js.Add("bootstrap.js");
-            js.Add("bootstrap.min.js");
+            js.Add("bootstrap.min.JS");
             Tree<string> fonts = new Tree<string>("fonts");
             fonts.Add("glyphicons-halflings-regular.eot");
             fonts.Add("glyphicons-halflings-regular.svg");
@@ -47,6 +49,15 @@ namespace GenericTree
             {
                 Console.WriteLine(item.Value);
             }*/
+
+            /*foreach(var item in bootstrap.GetItemsBreadthFirst())
+            {
+                Console.WriteLine(item);
+            }*/
+            //Console.WriteLine(bootstrap.Contains("bootstrap-theme.css"));
+            //Console.WriteLine(bootstrap.Contains(a=>a.StartsWith("bootst")));
+
+            Console.WriteLine(bootstrap.Find("/bootstrap/dist/js/bootstrap.min.js")); 
             Console.Read();
         }
     }

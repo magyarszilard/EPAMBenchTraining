@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,15 +10,26 @@ namespace GenericTree
 {
     public class Tree<T> : ICollection<T>
     {
+        public static string PathDelimiter = "/";
         private T _value;
         private Tree<T> _parent;
         private List<Tree<T>> _children;
+        private static Func<T, string> _nameConverter;
 
         public Tree(T value)
         {
             _value = value;
             _parent = null;
             _children = new List<Tree<T>>();
+            if(_nameConverter == null)
+                _nameConverter = (a => a.ToString());
+        }
+        public Tree(T value, Func<T, string> nameConverter)
+        {
+            _value = value;
+            _parent = null;
+            _children = new List<Tree<T>>();
+            _nameConverter = nameConverter;
         }
 
         private Tree(T value, Tree<T> parent)
@@ -91,18 +103,116 @@ namespace GenericTree
 
         public void Draw()
         {
-            Console.WriteLine(_value.ToString());
-            foreach(var item in GetItemsDepthFirst().Skip(1))
+            Console.WriteLine(_nameConverter(_value));
+            foreach(var item in GetNodesDepthFirst().Skip(1))
             {
-                for (int i = 1; i < item.Level; i++)
+                string s = _nameConverter(item._value);
+                Tree<T> current = item;
+                if (item.IsLastChild())
                 {
-                    Console.Write("|  ");
+                    s = "└──"+s;
                 }
-                Console.WriteLine("|--" + item.Value.ToString());
+                else
+                {
+                    s = "├──"+s;
+                }
+                while (current._parent != null)
+                {
+                    current = current._parent;
+                    if (current._parent != null)
+                    {
+                        if (current.IsLastChild())
+                        {
+                            s = "   " + s;
+                        }
+                        else
+                        {
+                            s = "│  " + s;
+                        }
+                    }
+                }
+                Console.WriteLine(s);
             }
         }
 
-        public IEnumerable<ItemWithLevel<T>> GetItemsDepthFirst()
+        public IEnumerable<T> GetItemsDepthFirst()
+        {
+            yield return _value;
+            foreach (var item in _children)
+            {
+                foreach (var depth in item.GetItemsDepthFirst())
+                {
+                    yield return depth;
+                }
+            }
+        }
+
+        public IEnumerable<Tree<T>> GetNodesDepthFirst()
+        {
+            yield return this;
+            foreach (var item in _children)
+            {
+                foreach (var depth in item.GetNodesDepthFirst())
+                {
+                    yield return depth;
+                }
+            }
+        }
+
+        public IEnumerable<T> GetItemsBreadthFirst(List<Tree<T>> children = null)
+        {
+            if (children == null)
+            {
+                yield return _value;
+                children = _children;
+            }
+            var allChildren = new List<Tree<T>>();
+            foreach (var item in children)
+            {
+                yield return item._value;
+                allChildren.AddRange(item._children);
+            }
+            if (allChildren.Count > 0)
+            {
+                foreach (var item in GetItemsBreadthFirst(allChildren))
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public bool IsLastChild()
+        {
+            if (_parent == null)
+                return true;
+            return _parent._children.Last().Equals(this);
+        }
+        public T Find(string path, Tree<T> node = null)
+        {
+            path = path.Trim(PathDelimiter.ToArray());
+            int index = path.IndexOf(PathDelimiter);
+            if (index < 0)
+                index = path.Length;
+            string current = path.Substring(0, index);
+            if (node == null)
+            {
+                if (current != _nameConverter(_value))
+                    return default(T);
+                node = this;
+            }
+            else
+            {
+                node = node._children.FirstOrDefault(a => _nameConverter(a._value) == current);
+                if (node == null)
+                    return default(T);
+            }
+            string remainder = path.Substring(index + PathDelimiter.Length - 1);
+            if (string.IsNullOrEmpty(remainder))
+                return node._value;
+            return Find(remainder, node);
+        }
+
+        /*public IEnumerable<ItemWithLevel<T>> GetItemsDepthFirst()
         {
             return GetItemsDepthFirst(0);
         }
@@ -117,7 +227,9 @@ namespace GenericTree
                     yield return depth;
                 }
             }
-        }
+        }*/
+
+
 
         /*public IEnumerable<T> GetItemsBreadthFirst()
         {
@@ -132,7 +244,7 @@ namespace GenericTree
         }*/
     }
 
-    public class ItemWithLevel<T>
+    /*public class ItemWithLevel<T>
     {
         private T _value;
         private int _level;
@@ -143,5 +255,5 @@ namespace GenericTree
             _value = value;
             _level = level;
         }
-    }
+    }*/
 }
