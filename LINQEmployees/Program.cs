@@ -26,16 +26,22 @@ namespace LINQEmployees
               new { Name="Marton", Salary=500}
             };
 
-            Console.WriteLine(employees.OrderByDescending(o => o.Salary).Select(s => s.Name).First());
-            var lowEarners = employees.Where(a => a.Salary < employees.Average(avg => avg.Salary)).Select(s => s.Name);
+            //Display the name of the employee who earns the most
+            var highestSalaryEmployee = employees.OrderByDescending(o => o.Salary).First().Name;
+            //Display the name of the employees who earn less than the company average.
+            var avg = employees.Average(a => a.Salary);
+            var lowEarners = employees.Where(a => a.Salary < avg).Select(s => s.Name);
+            //Sort the employees by their salaries in an ascending order
             var ordered = employees.OrderBy(o => o.Salary);
-            var sameSalary = employees.Where(a => employees.Count(c => c.Salary == a.Salary) > 1).OrderBy(o => o.Salary).ThenBy(o => o.Name).Select(s => s.Name);
+            //Display the name of employees who earn the same amount and sort the result by salaries then names in an ascending order
+            var sameSalary = employees.Where(a => employees.Any(c => c.Salary == a.Salary && c.Name != a.Name)).OrderBy(o => o.Salary).ThenBy(o => o.Name).Select(s => s.Name);
+            //Group the employees in the following salary ranges: 200-399, 400-599, 600-799, 800-999
             var group = employees.GroupBy(g => g.Salary < 400 ? "200-399" : g.Salary < 600 ? "400-599" : g.Salary < 800 ? "600-799" : "800-999").Select(s=>new
             {
                 Range = s.Key,
                 Employees = s,
             });
-            Console.Read();
+            
         }
     }
 }
