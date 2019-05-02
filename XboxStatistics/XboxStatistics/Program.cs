@@ -44,15 +44,20 @@ namespace XboxStatistics
 
         static string HowManyDaysDidIPlay()
         {
-            //HINT: there's a game stat property called MinutesPlayed, and as the name suggests it stored total minutes
-            return ((double)Xbox.GameStats.Values.Sum(sum => sum.Any(a => a.Name == "MinutesPlayed" && !string.IsNullOrEmpty(a.Value)) ? double.Parse(sum.First(a => a.Name == "MinutesPlayed").Value) : 0) / 1440).ToString("0.##");
+            //HINT: there's a game stat  property called MinutesPlayed, and as the name suggests it stored total minutes
+            return ((double)Xbox.GameStats.Values.Sum(sum => sum
+            .Any(a => a.Name == "MinutesPlayed" && !string.IsNullOrEmpty(a.Value)) ? 
+            double.Parse(sum.First(a => a.Name == "MinutesPlayed").Value) : 0) / 1440).ToString("0.##");
         }
 
         static string WhichGameHaveISpentTheMostHoursPlaying()
         {
             //HINT: there's a game stat property called MinutesPlayed, and as the name suggests it stored total minutes
-            return Xbox.GameStats.OrderByDescending(o => o.Value.Any(a => a.Name == "MinutesPlayed" && !string.IsNullOrEmpty(a.Value)) ? int.Parse(o.Value.First(a => a.Name == "MinutesPlayed").Value) : 0)
-                .Select(s => Xbox.MyGames.First(a => a.TitleId == s.Key).Name + " -> " + (int.Parse(s.Value.First(a => a.Name == "MinutesPlayed").Value) / 60).ToString() + " hours").First();
+            return Xbox.GameStats.OrderByDescending(o => o.Value
+            .Any(a => a.Name == "MinutesPlayed" && !string.IsNullOrEmpty(a.Value)) 
+            ? int.Parse(o.Value.First(a => a.Name == "MinutesPlayed").Value) : 0)
+                .Select(s => Xbox.MyGames.First(a => a.TitleId == s.Key).Name + 
+                " -> " + (int.Parse(s.Value.First(a => a.Name == "MinutesPlayed").Value) / 60).ToString() + " hours").First();
         }
 
         static string HowMuchGamescoreDoIHave()
@@ -67,27 +72,33 @@ namespace XboxStatistics
 
         static string ListAllOfMyStatisticsInBindingOfIsaac()
         {
-            return string.Join(Environment.NewLine, Xbox.GameStats[794552001].Select(s => $"{s.Name} = {s.Value}"));
+            return string.Join(Environment.NewLine, Xbox.GameStats[Xbox.MyGames.First(a=>a.Name.ToLower().StartsWith("the binding of isaac")).TitleId]
+                .Select(s => $"{s.Name} = {s.Value}"));
         }
 
         static string HowManyAchievementsDidIEarnPerYear()
         {
             //HINT: unlocked achievements have an "Achieved" progress state
-            return string.Join(Environment.NewLine, Xbox.Achievements.Values.SelectMany(s => s.Select(ss => new { ss.Progression.TimeUnlocked, ss.ProgressState })).Where(a => a.ProgressState == "Achieved")
-                .GroupBy(g => g.TimeUnlocked.Year).OrderBy(o=>o.Key).Select(s => $"{s.Key}: {s.Count()}"));
+            return string.Join(Environment.NewLine, Xbox.Achievements.Values
+                .SelectMany(s => s.Select(ss => new { ss.Progression.TimeUnlocked.Year, ss.ProgressState }))
+                .Where(a => a.ProgressState == "Achieved")
+                .GroupBy(g => g.Year).OrderBy(o=>o.Key).Select(s => $"{s.Key}: {s.Count()}"));
         }
 
         static string ListAllOfMyGamesWhereIHaveEarnedARareAchievement()
         {
             //HINT: rare achievements have a rarity category called "Rare"
-            return string.Join(Environment.NewLine, Xbox.Achievements.Where(a => a.Value.Any(aa => aa.Rarity.CurrentCategory == "Rare" && aa.ProgressState == "Achieved"))
+            return string.Join(Environment.NewLine, Xbox.Achievements
+                .Where(a => a.Value.Any(aa => aa.Rarity.CurrentCategory == "Rare" && aa.ProgressState == "Achieved"))
                 .Select(s => Xbox.MyGames.First(a => a.TitleId == s.Key).Name).OrderBy(o=>o));
         }
 
         static string ListTheTop3GamesWhereIHaveEarnedTheMostRareAchievements()
         {
             return string.Join(Environment.NewLine, Xbox.Achievements
-                .Select(s => new { Xbox.MyGames.First(a => a.TitleId == s.Key).Name, Sum = s.Value.Count(a => a.Rarity.CurrentCategory == "Rare" && a.ProgressState == "Achieved") })
+                .Select(s => new {
+                    Xbox.MyGames.First(a => a.TitleId == s.Key).Name,
+                    Sum = s.Value.Count(a => a.Rarity.CurrentCategory == "Rare" && a.ProgressState == "Achieved") })
                 .OrderByDescending(o => o.Sum).Select(s=> $"{s.Name}: ({s.Sum})").Take(3));
         }
 
@@ -96,10 +107,12 @@ namespace XboxStatistics
             return Xbox.Achievements.Select(s => new
             {
                 Xbox.MyGames.First(a => a.TitleId == s.Key).Name,
-                Achievement = s.Value.Where(a => a.Rarity.CurrentCategory == "Rare" && a.ProgressState == "Achieved")
+                RarestAchievement = s.Value.Where(a => a.ProgressState == "Achieved")
                 .Select(ss => new { ss.Name, ss.Rarity.CurrentPercentage }).OrderBy(o => o.CurrentPercentage).FirstOrDefault()
-            }).Where(a=>a.Achievement != null)
-                .OrderBy(o => o.Achievement.CurrentPercentage).Select(s => $"You are among the {s.Achievement.CurrentPercentage}% of gamers who earned the \"{s.Achievement.Name}\" in {s.Name}").First();
+            }).Where(a=>a.RarestAchievement != null)
+                .OrderBy(o => o.RarestAchievement.CurrentPercentage)
+                .Select(s => $"You are among the {s.RarestAchievement.CurrentPercentage}% of gamers who earned the \"{s.RarestAchievement.Name}\" in {s.Name}")
+                .First();
         }
     }
 }
