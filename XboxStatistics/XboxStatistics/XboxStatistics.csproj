@@ -78,7 +78,6 @@
     <Compile Include="MyXboxOneGames.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XboxOneGetter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

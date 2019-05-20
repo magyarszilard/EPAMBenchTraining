@@ -15,6 +15,7 @@ namespace XboxStatistics
 
         public MyXboxOneGames()
         {
+            Directory.SetCurrentDirectory(@"..\..\Data");
             var all = JsonConvert.DeserializeObject<XboxOneGameCollection>(File.ReadAllText("all.json"));
             MyGames = all.Titles.Where(t => t.TitleType.EndsWith("Game")).ToArray();
             GameDetails = new Dictionary<int, XboxOneGame>();

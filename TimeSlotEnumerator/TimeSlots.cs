@@ -79,4 +79,3 @@ namespace TimeSlotEnumerator
             return GetEnumerator();
         }*/
 }
-}
