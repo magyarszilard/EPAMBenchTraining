@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -13,5 +14,6 @@ namespace Airports
         public string TimeZoneName { get; set; }
         [JsonIgnore]
         public Country Country { get; set; }
+
     }
 }
