@@ -34,11 +34,31 @@ namespace Kitchen
                 new FrenchFries(order1, watch),
                 new FrenchFries(order1, watch),
             });
-            var orders = new List<Order>() { order1 };
+            Order order2;
+            order2 = new Order("Order2", watch);
+            order2.SetOrderItems(new List<IFood>()
+            {
+                new BasicBurger(order2, watch),
+                new BasicBurger(order2, watch),
+                new CheeseBurger(order2, watch),
+                new CheeseBurger(order2, watch),
+                new DoubleBurger(order2, watch),
+                new DoubleBurger(order2, watch),
+                new FullBurger(order2, watch),
+                new FullBurger(order2, watch),
+                new FrenchFriesWithKetchup(order2, watch),
+                new FrenchFriesWithKetchup(order2, watch),
+                new FrenchFriesWithKetchup(order2, watch),
+                new FrenchFriesWithKetchup(order2, watch),
+                new FrenchFries(order2, watch),
+                new FrenchFries(order2, watch),
+                new FrenchFries(order2, watch),
+            });
+            var orders = new List<Order>() { order1, order2 };
             watch.Start();
             kitchen.RecieveOrders(orders);
             var t = cook1.StartWork();
-            //var t2 = cook2.StartWork();
+            var t2 = cook2.StartWork();
             t.Wait();
             //t2.Wait();
         }
