@@ -97,6 +97,7 @@ namespace Kitchen
                 var ingredients = currentOwen.EmptyOwen();
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"[{_watch.Elapsed}] " + ingredients.Count() + "x " + ingredients.First().ToString() + " cooked");
+                
                 foreach (var ingr in ingredients)
                 {
                     ingr.IsCooked = true;

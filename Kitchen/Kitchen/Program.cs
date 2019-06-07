@@ -54,7 +54,7 @@ namespace Kitchen
                 new FrenchFries(order2, watch),
                 new FrenchFries(order2, watch),
             });
-            var orders = new List<Order>() { order1, order2 };
+            var orders = new List<Order>() { order1 };
             watch.Start();
             kitchen.RecieveOrders(orders);
             var t = cook1.StartWork();
