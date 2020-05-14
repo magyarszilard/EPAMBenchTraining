@@ -30,9 +30,21 @@ namespace ManhattanSkyline
                 watch.Start();
                 var result2 = implementation2.CalculateWater();
                 watch.Stop();
-                Console.WriteLine(implementation2.CalculateWater());
+                Console.WriteLine(result2);
                 Console.WriteLine(watch.Elapsed);
+
+                var implementation3 = new ThirdImplementation(input);
+                watch.Reset();
+                watch.Start();
+                var result3 = implementation3.CalculateWater();
+                watch.Stop();
+                Console.WriteLine(result3);
+                Console.WriteLine(watch.Elapsed);
+
+                //Console.WriteLine(string.Join(",", input));
                 Console.ReadLine();
+
+
             }
         }
     }
